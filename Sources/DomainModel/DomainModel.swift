@@ -171,4 +171,34 @@ public class Person {
 // Family
 //
 public class Family {
+    // collection of persons
+    var members: [Person]
+    // why do i have to add them as properties?
+    let spouse1: Person
+    let spouse2: Person
+
+    init(spouse1: Person, spouse2: Person) {
+        self.spouse1 = spouse2
+        self.spouse2 = spouse1
+        self.members = [spouse1, spouse2]
+    }
+
+    func householdIncome() -> Int {
+        var totalIncome = 0
+        // loop over everyone in family and add them to totalIncome, default income to 0 if no job
+        for member in members {
+            totalIncome += member.job?.calculateIncome(2000) ?? 0
+        }
+        return totalIncome
+    }
+
+    func haveChild(_ newMember : Person) -> Bool {
+        if(spouse1.age < 21 && spouse2.age < 21) {
+            return false
+        } else {
+            members.append(newMember)
+            return true
+        }
+    }
+
 }
